@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Happy Birthday - Soft Pink Wishes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animasi -->
+    <div class="bg-deco"></div>
+
+    <!-- Kartu Utama -->
+    <div class="card">
+        <div class="card-inner">
+            <!-- Bagian atas dengan lilin dan kue -->
+            <div class="cake-section">
+                <div class="candle-container">
+                    <div class="candle">
+                        <div class="flame">
+                            <div class="flame-inner"></div>
+                        </div>
+                        <div class="wick"></div>
+                        <div class="candle-body"></div>
+                    </div>
+                    <div class="candle-shadow"></div>
+                </div>
+                <div class="cake-base">
+                    <div class="cake-layer layer1"></div>
+                    <div class="cake-layer layer2"></div>
+                    <div class="cake-layer layer3"></div>
+                    <div class="cake-dots"></div>
+                </div>
+            </div>
+
+            <!-- Teks Ucapan -->
+            <div class="greeting">
+                <div class="birthday-badge">
+                    <span class="badge-text">🎂 HAPPY BIRTHDAY 🎂</span>
+                </div>
+                <h1 class="name">Niken ❤️</h1>
+                <div class="message-box">
+                    <p class="message">
+                        semoga nasimu selalu hangat, lampu yang dilalui selalu hijau dan semoga selalu merasa teduh di setiap terik.
+                    </p>
+                    <p class="signature">Mwah, <span class="sign-name">Love u Niken anime</span></p>
+                </div>
+            </div>
+
+            <!-- Balon-balon kecil -->
+            <div class="balloons">
+                <div class="balloon balloon1"></div>
+                <div class="balloon balloon2"></div>
+                <div class="balloon balloon3"></div>
+                <div class="balloon balloon4"></div>
+            </div>
+
+            <!-- Tombol Kejutan -->
+            <div class="surprise-btn">
+                <button class="btn-surprise" id="surpriseBtn">
+                    <span class="btn-text">✨ Click Here ✨</span>
+                </button>
+            </div>
+
+            <!-- Animasi confetti message -->
+            <div id="confetti-message" class="confetti-msg"></div>
+        </div>
+    </div>
+
+    <script>
+        // Konfeti sederhana untuk interaksi tombol
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const confettiMsg = document.getElementById('confetti-message');
+
+        function createConfetti() {
+            for (let i = 0; i < 80; i++) {
+                const conf = document.createElement('div');
+                conf.classList.add('confetti-piece');
+                const size = Math.random() * 8 + 4;
+                conf.style.width = size + 'px';
+                conf.style.height = size + 'px';
+                conf.style.left = Math.random() * 100 + '%';
+                conf.style.animationDuration = Math.random() * 1.5 + 1 + 's';
+                conf.style.animationDelay = Math.random() * 0.3 + 's';
+                conf.style.backgroundColor = `hsl(${Math.random() * 40 + 330}, 80%, 65%)`;
+                conf.style.opacity = Math.random() * 0.7 + 0.4;
+                confettiMsg.appendChild(conf);
+                
+                setTimeout(() => {
+                    conf.remove();
+                }, 2500);
+            }
+        }
+
+        function showFloatingHearts() {
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 80 + 10 + '%';
+                heart.style.fontSize = Math.random() * 20 + 16 + 'px';
+                heart.style.animationDuration = Math.random() * 1.5 + 1.2 + 's';
+                heart.style.opacity = Math.random() * 0.6 + 0.4;
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 1800);
+            }
+        }
+
+        surpriseBtn.addEventListener('click', () => {
+            createConfetti();
+            showFloatingHearts();
+            
+            // Ubah teks tombol sementara
+            const originalText = surpriseBtn.innerHTML;
+            surpriseBtn.innerHTML = '<span class="btn-text">💖 Terkirim! Love You 💖</span>';
+            setTimeout(() => {
+                surpriseBtn.innerHTML = originalText;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

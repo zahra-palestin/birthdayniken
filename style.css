@@ -1,0 +1,493 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #ffe6f0 0%, #ffd9e8 100%);
+    font-family: 'Poppins', 'Quicksand', 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ============ BACKGROUND ANIMASI ============ */
+.bg-deco {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-deco::before,
+.bg-deco::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 200, 220, 0.3) 0%, rgba(255, 180, 200, 0) 70%);
+    border-radius: 50%;
+    animation: floatBg 20s infinite ease-in-out;
+}
+
+.bg-deco::before {
+    top: -100px;
+    left: -100px;
+}
+
+.bg-deco::after {
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -8s;
+}
+
+@keyframes floatBg {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(40px, 30px) scale(1.2); opacity: 0.7; }
+}
+
+/* Membuat bubble dan heart floating dengan javascript */
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    pointer-events: none;
+    z-index: 200;
+    animation: floatHeartUp 1.8s ease-out forwards;
+    font-size: 20px;
+}
+
+@keyframes floatHeartUp {
+    0% {
+        bottom: -20px;
+        opacity: 0;
+        transform: scale(0.6) rotate(0deg);
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        bottom: 100vh;
+        opacity: 0;
+        transform: scale(1.2) rotate(15deg);
+    }
+}
+
+/* ============ KARTU UTAMA ============ */
+.card {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    width: 100%;
+    background: rgba(255, 250, 252, 0.96);
+    backdrop-filter: blur(3px);
+    border-radius: 70px 55px 85px 55px;
+    box-shadow: 0 35px 60px rgba(255, 120, 160, 0.3), 
+                0 10px 25px rgba(0, 0, 0, 0.05),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: cardGlow 4s infinite alternate;
+}
+
+@keyframes cardGlow {
+    0% {
+        box-shadow: 0 35px 60px rgba(255, 140, 180, 0.25), 0 10px 25px rgba(0,0,0,0.05);
+    }
+    100% {
+        box-shadow: 0 45px 75px rgba(255, 120, 170, 0.45), 0 15px 30px rgba(0,0,0,0.08);
+    }
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card-inner {
+    padding: 2rem 2rem 2.5rem;
+    position: relative;
+}
+
+/* ============ SECTION Kue & Lilin ============ */
+.cake-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.candle-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.candle {
+    position: relative;
+    width: 36px;
+    height: 90px;
+    cursor: pointer;
+    animation: gentleSway 2s infinite ease-in-out;
+    transform-origin: center bottom;
+}
+
+@keyframes gentleSway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.candle-body {
+    position: absolute;
+    bottom: 0;
+    width: 32px;
+    height: 70px;
+    background: linear-gradient(135deg, #ffe0e7, #ffc0d0);
+    border-radius: 16px 16px 6px 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.wick {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 10px;
+    background: #5a3e2b;
+    border-radius: 2px;
+}
+
+.flame {
+    position: absolute;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 32px;
+    background: radial-gradient(circle, #ffb347, #ff6b6b);
+    border-radius: 50% 50% 30% 30%;
+    filter: blur(0.8px);
+    animation: flicker 0.2s infinite alternate;
+}
+
+.flame-inner {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(circle, #fff5b0, #ffb347);
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+    100% { transform: translateX(-50%) scale(1.1, 0.95); opacity: 1; }
+}
+
+.candle-shadow {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 40px;
+    height: 8px;
+    background: rgba(255, 160, 180, 0.3);
+    border-radius: 50%;
+    filter: blur(3px);
+    transform: translateX(-50%);
+}
+
+.cake-base {
+    margin-top: 8px;
+    position: relative;
+}
+
+.cake-layer {
+    height: 18px;
+    width: 170px;
+    border-radius: 20px;
+    margin: -2px auto;
+    transition: all 0.2s;
+}
+
+.layer1 {
+    background: linear-gradient(90deg, #ffb7c5, #ff9eb0);
+    width: 190px;
+    height: 22px;
+    border-radius: 30px 30px 15px 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.layer2 {
+    background: linear-gradient(90deg, #ffcad5, #ffb0c0);
+    width: 210px;
+    height: 20px;
+}
+
+.layer3 {
+    background: linear-gradient(90deg, #ffdee6, #ffc2d0);
+    width: 230px;
+    height: 20px;
+    border-radius: 12px 12px 25px 25px;
+}
+
+.cake-dots {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.cake-dots::before,
+.cake-dots::after {
+    content: "🌸";
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.cake-dots::before {
+    margin-right: 10px;
+}
+
+/* ============ GREETING & TEKS ============ */
+.greeting {
+    text-align: center;
+    margin: 1rem 0 1rem;
+}
+
+.birthday-badge {
+    display: inline-block;
+    background: linear-gradient(120deg, #ffb7c5, #ff9eb3);
+    padding: 0.5rem 1.8rem;
+    border-radius: 60px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 6px 14px rgba(255, 120, 150, 0.25);
+}
+
+.badge-text {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #fff0f3;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.name {
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e85d8f, #c43a6b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 8px rgba(255, 140, 170, 0.2);
+    letter-spacing: -0.5px;
+}
+
+.message-box {
+    background: rgba(255, 244, 247, 0.8);
+    padding: 1.8rem;
+    border-radius: 48px;
+    margin: 0.8rem 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 10px 20px rgba(0,0,0,0.03);
+}
+
+.message {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #ab6d82;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.signature {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #e07b9e;
+    font-weight: 500;
+    text-align: right;
+    font-style: italic;
+}
+
+.sign-name {
+    font-weight: 700;
+    color: #d45c86;
+}
+
+/* ============ BALON KECIL ANIMASI ============ */
+.balloons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0 0.8rem;
+    flex-wrap: wrap;
+}
+
+.balloon {
+    width: 45px;
+    height: 55px;
+    background: radial-gradient(circle at 30% 30%, #ffb7cc, #ff87ae);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: -3px 5px 10px rgba(0,0,0,0.05);
+    animation: balloonFloat 3s infinite ease-in-out;
+    transform-origin: bottom center;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5px;
+    height: 15px;
+    background: #a05e79;
+}
+
+.balloon::before {
+    content: '🎈';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 22px;
+    opacity: 0.5;
+}
+
+.balloon1 { animation-delay: 0s; background: radial-gradient(circle at 30% 30%, #ffadc6, #ff7ca3); }
+.balloon2 { animation-delay: 0.4s; background: radial-gradient(circle at 30% 30%, #ffbfcf, #ff96b5); width: 40px; height: 50px; }
+.balloon3 { animation-delay: 0.8s; background: radial-gradient(circle at 30% 30%, #ffcadd, #ffaac2); }
+.balloon4 { animation-delay: 1.2s; background: radial-gradient(circle at 30% 30%, #ffd0e0, #ffb2c8); width: 38px; height: 48px; }
+
+@keyframes balloonFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+/* ============ TOMBOL SURPRISE ============ */
+.surprise-btn {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.btn-surprise {
+    background: linear-gradient(100deg, #ffb0c2, #ff8aaf);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(255, 100, 130, 0.3);
+    transition: all 0.25s ease;
+    transform: scale(1);
+    letter-spacing: 0.5px;
+}
+
+.btn-surprise:hover {
+    transform: scale(1.04);
+    background: linear-gradient(100deg, #ff9ebb, #ff7aa2);
+    box-shadow: 0 12px 24px rgba(255, 100, 130, 0.4);
+}
+
+.btn-text {
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.btn-surprise:active .btn-text {
+    transform: scale(0.96);
+}
+
+/* ============ KONFETI & FLOATING MESSAGE ============ */
+.confetti-msg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -20px;
+    background: #ff87ae;
+    width: 8px;
+    height: 8px;
+    animation: confettiFall 1.8s linear forwards;
+    transform: rotate(25deg);
+    border-radius: 2px;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+    .card-inner {
+        padding: 1.4rem;
+    }
+    .name {
+        font-size: 1.9rem;
+    }
+    .cake-layer {
+        width: 150px;
+    }
+    .layer1 { width: 160px; }
+    .layer2 { width: 180px; }
+    .layer3 { width: 200px; }
+    .message {
+        font-size: 0.9rem;
+    }
+    .balloon {
+        width: 35px;
+        height: 42px;
+    }
+    .balloon2, .balloon4 {
+        width: 32px;
+        height: 40px;
+    }
+    .btn-surprise {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .balloons {
+        gap: 0.8rem;
+    }
+    .badge-text {
+        font-size: 0.75rem;
+    }
+}
